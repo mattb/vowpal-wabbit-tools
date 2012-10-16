@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# test specs based on examples from http://hunch.net/~vw/validate.html
 describe VowpalWabbit::Fileformat do
   describe "parse lines" do
     it "works on a basic line" do
