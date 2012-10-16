@@ -1,8 +1,10 @@
 # VowpalWabbit::Tools
 
-TODO: Write a gem description
+THIS IS DRAFT CODE
 
-## Installation
+Some ruby utilities for dealing with Vowpal Wabbit's file format, preparing data for use with VW, etc.
+
+## Installation [pending, haven't published the gem yet]
 
 Add this line to your application's Gemfile:
 
