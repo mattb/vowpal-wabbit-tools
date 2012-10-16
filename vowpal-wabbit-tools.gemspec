@@ -5,7 +5,7 @@ require 'vowpal-wabbit-tools/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "vowpal-wabbit-tools"
-  gem.version       = Vowpal::Wabbit::Tools::VERSION
+  gem.version       = VowpalWabbit::Tools::VERSION
   gem.authors       = ["Matt Biddulph"]
   gem.email         = ["mb@hackdiary.com"]
   gem.description   = %q{TODO: Write a gem description}
@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+  gem.add_development_dependency "rspec"
 end
