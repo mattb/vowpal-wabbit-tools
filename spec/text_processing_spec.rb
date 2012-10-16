@@ -1,0 +1,16 @@
+require 'spec_helper'
+
+DATA=<<EOF
+1 http://www.guardian.co.uk/business/2012/oct/12/george-osborne-triple-threat-global-economy| george:1 osborne:1 warned:1 leaders:1 fear:1 worsening:1 global:1 economic:1 crisis:1 growth:1 slows:1 pressure:1 intensifies:1 indebted:1 governments:1 weak:1 banks:1 speaking:1 tokyo:1 george:1 osborne:1 friday:1 chancellor:1 danger:1 financial:1 disaster:1 receded:1 prospect:1 seismic:1 shock:1 global:1 economy:1 years:1 heightened:1 triple:1 threat:1 economic:1 downturn:1 europe:1 emerging:1 economies:1 coming:1 days:1 international:1 monetary:1 fund:1 downgraded:1 growth:1 forecasts:1 majority:1 developed:1 countries:1 including:1 osborne's:1 view:1 chimes:1 policy:1 makers:1 sense:1 crisis:1 meetings:1 year's:1 annual:1 meetings:1 greater:1 concern:1 lurks:1 corner:1 greater:1 concern:1 medium:1 term:1 risks:1 imf:1 warned:1 europe:1 japan:1 lack:1 action:1 refashion:1 financial:1 system:1 wake:1 banking:1 crisis:1 created:1 problems:1 future:1 report:1 earlier:1 week:1 actions:1 european:1 central:1 bank:1 lifted:1 prospect:1 eurozone:1 country:1 going:1 bankrupt:1 risks:1 remain:1 year:1 moves:1 spur:1 growth:1 osborne:1 eurozone:1 looming:1 fiscal:1 cliff:1 emerging:1 market:1 slowdown:1 triple:1 threats:1 global:1 recovery:1 stressed:1 meetings:1 tokyo:1 delivery:1 areas:1 eurozone:1 delivering:1 effective:1 implementation:1 talked:1 resolving:1 problem:1 election:1 fiscal:1 cliff:1 emerging:1 markets:1 continuing:1 structural:1 reforms:1 openness:1 require:1 osborne:1 pressure:1 relax:1 britain's:1 austerity:1 programme:1 years:1 low:1 growth:1 economists:1 expect:1 economy:1 exit:1 recession:1 gdp:1 figures:1 appear:1 month:1 trend:1 remain:1 flat:1 imf:1 green:1 light:1 delay:1 austerity:1 measures:1 favour:1 boost:1 investment:1 tax:1 cuts:1 vicky:1 redwood:1 economist:1 capital:1 economics:1 imf's:1 analysis:1 austerity:1 measures:1 damaging:1 economy:1 assumed:1 osborne:1 excuse:1 deficit:1 reduction:1 targets:1 month:1 ahead:1 chancellor:1 defer:1 spending:1 cuts:1 economy:1 stronger:1 imf:1 calculated:1 impact:1 tax:1 rises:1 spending:1 cuts:1 lead:1 bigger:1 reductions:1 gdp:1 effectively:1 harm:1 good:1 economy:1 forcing:1 government:1 borrow:1 osborne:1 expected:1 borrowing:1 target:1 25bn:1 fall:1 tax:1 revenues:1 rise:1 social:1 security:1 costs:1 linked:1 high:1 unemployment:1 hinted:1 speech:1 tory:1 party:1 conference:1 earlier:1 week:1 global:1 slowdown:1 encourage:1 flexible:1 approach:1 imf:1 meeting:1 repeated:1 stance:1 countries:1 needed:1 push:1 ahead:1 spending:1 cuts:1 structural:1 reforms:1 general:1 western:1 countries:1 face:1 sink:1 swim:1 question:1 prime:1 minister:1 posed:1 decline:1 declining:1 confronting:1 problems:1 reforms:1 required:1 tackling:1 debts:1
+EOF
+
+describe VowpalWabbit::TextProcessing do
+  describe "rare term removal" do
+    it "needs testing" do
+      data = VowpalWabbit::Fileformat.parse_line(DATA)
+      removed = VowpalWabbit::TextProcessing.remove_rare_terms([data]).first
+      removed[:features][0][:features].size.should eq 11
+      removed[:features][0][:features].should eq [["osborne", 1.0], ["osborne", 1.0], ["economy", 1.0], ["osborne", 1.0], ["osborne", 1.0], ["economy", 1.0], ["economy", 1.0], ["osborne", 1.0], ["economy", 1.0], ["economy", 1.0], ["osborne", 1.0]]
+    end
+  end
+end

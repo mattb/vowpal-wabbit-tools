@@ -1,6 +1,37 @@
 require "vowpal-wabbit-tools/version"
 
 module VowpalWabbit
+  module TextProcessing
+    def self.term_frequencies(examples)
+      terms = {}
+      terms.default = 0
+      for example in examples
+        for features in example[:features]
+          for feature in features[:features]
+            terms[feature[0]] += feature[1]
+          end
+        end
+      end
+      return terms
+    end
+    def self.rare_terms(examples, cutoff=5)
+      self.term_frequencies(examples).select { |term, count| count < cutoff }.map { |term,count| term }
+    end
+    def self.remove_rare_terms(examples, cutoff=5)
+      rare_terms = {}
+      self.rare_terms(examples, cutoff).each { |term| rare_terms[term] = 1 }
+      examples.map { |example|
+        result = {}.merge(example)
+        result[:features] = example[:features].map { |feature|
+          f = {}
+          f[:namespace] = feature[:namespace]
+          f[:features] = feature[:features].select { |feature| !rare_terms.has_key? feature[0] }
+          f
+        }
+        result
+      }
+    end
+  end
   module Fileformat
     def self.parse_lines(lines)
       lines.map { |line| self.parse_line(line) }
